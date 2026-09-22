@@ -1,0 +1,38 @@
+.new-job-page {
+  max-width: 680px;
+}
+
+.page-subtitle {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-5);
+}
+
+.quick-add-box {
+  background: var(--paper-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.quick-add-form {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.quick-add-form input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  font-size: 13.5px;
+}
+
+.quick-add-note {
+  margin-top: var(--space-2);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}

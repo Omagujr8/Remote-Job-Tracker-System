@@ -1,0 +1,28 @@
+.job-form {
+  max-width: 620px;
+}
+
+.job-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.job-form textarea {
+  padding: 9px 11px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  resize: vertical;
+  min-height: 100px;
+}
+
+.job-form textarea:focus {
+  border-color: var(--pine);
+}
+
+@media (max-width: 560px) {
+  .job-form-row {
+    grid-template-columns: 1fr;
+  }
+}

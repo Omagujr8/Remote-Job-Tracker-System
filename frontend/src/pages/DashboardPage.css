@@ -1,0 +1,13 @@
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.dashboard-stale-note {
+  color: var(--gold);
+  font-weight: 600;
+}

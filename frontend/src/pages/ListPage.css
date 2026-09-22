@@ -1,0 +1,120 @@
+.list-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.list-header-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.list-filters {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.list-search {
+  flex: 1;
+  min-width: 220px;
+  padding: 8px 11px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  font-size: 14px;
+}
+
+.list-filters select {
+  padding: 8px 11px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  font-size: 14px;
+}
+
+.list-archive-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.job-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  text-transform: none;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+.job-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.job-table tr:last-child td {
+  border-bottom: none;
+}
+
+.job-table-title {
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+}
+.job-table-title:hover {
+  color: var(--pine);
+}
+
+.is-archived-row {
+  opacity: 0.55;
+}
+
+.archived-tag {
+  font-size: 11px;
+  color: var(--ink-faint);
+  border: 1px solid var(--hairline);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 720px) {
+  .job-table thead {
+    display: none;
+  }
+  .job-table,
+  .job-table tbody,
+  .job-table tr,
+  .job-table td {
+    display: block;
+    width: 100%;
+  }
+  .job-table tr {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .job-table td {
+    border-bottom: none;
+    padding: 2px 0;
+  }
+}

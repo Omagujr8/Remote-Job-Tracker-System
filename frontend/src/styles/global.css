@@ -1,0 +1,254 @@
+:root {
+  /* Core palette */
+  --paper: #f0f1ec;
+  --paper-raised: #f8f8f4;
+  --ink: #1c2321;
+  --ink-soft: #4a534e;
+  --ink-faint: #8b938e;
+  --hairline: rgba(28, 35, 33, 0.14);
+  --hairline-strong: rgba(28, 35, 33, 0.28);
+
+  --pine: #1f4741;
+  --pine-dark: #14312c;
+  --pine-tint: #e4ebe9;
+
+  --gold: #c99a3b;
+  --gold-tint: #f5ead0;
+
+  /* Status colors */
+  --status-applied: #5b7b9a;
+  --status-applied-tint: #e6edf2;
+  --status-interviewing: #c99a3b;
+  --status-interviewing-tint: #f5ead0;
+  --status-offer: #2f7a5d;
+  --status-offer-tint: #e1f0e8;
+  --status-rejected: #a8503a;
+  --status-rejected-tint: #f4e3de;
+  --status-withdrawn: #8a8a82;
+  --status-withdrawn-tint: #eaeae6;
+
+  /* Type */
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --radius-sm: 3px;
+  --radius-md: 5px;
+
+  --sidebar-width: 232px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: 30px;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 21px;
+}
+
+h3 {
+  font-size: 17px;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--pine);
+}
+
+button {
+  font-family: var(--font-ui);
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pine);
+  outline-offset: 2px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+  line-height: 1;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--pine);
+  color: var(--paper-raised);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--pine-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--hairline-strong);
+  color: var(--ink);
+}
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--ink);
+  background: var(--paper-raised);
+}
+
+.btn-danger {
+  background: transparent;
+  border-color: var(--status-rejected);
+  color: var(--status-rejected);
+}
+.btn-danger:hover:not(:disabled) {
+  background: var(--status-rejected-tint);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  padding: 6px 10px;
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+/* Form fields */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 9px 11px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--pine);
+}
+
+.field-error {
+  font-size: 12.5px;
+  color: var(--status-rejected);
+}
+
+.field-hint {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.banner-error {
+  background: var(--status-rejected-tint);
+  border: 1px solid var(--status-rejected);
+  color: var(--status-rejected);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+}
+
+.banner-info {
+  background: var(--gold-tint);
+  border: 1px solid var(--gold);
+  color: #6b5220;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

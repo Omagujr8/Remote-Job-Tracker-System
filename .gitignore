@@ -1,0 +1,36 @@
+# Python
+backend/.venv/
+backend/venv/
+backend/myenv/
+backend/__pycache__/
+backend/**/*.py[cod]
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+backend/*.egg-info/
+
+# Local configuration and secrets
+backend/.env
+frontend/.env
+frontend/.env.local
+*.secret
+*.pem
+*.key
+
+# Local data and user uploads
+backend/*.db
+backend/*.sqlite3
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# JavaScript
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
