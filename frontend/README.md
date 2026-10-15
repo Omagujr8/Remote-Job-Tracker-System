@@ -65,6 +65,8 @@ Outputs a static site to `dist/`.
 5. Deploy. Every push to `main` triggers a new deployment; every other branch/PR gets its own preview URL.
 6. Once deployed, go back to the backend's `CORS_ORIGINS` env var on Render/Railway and add this Vercel URL, then redeploy the backend so it accepts requests from the live frontend.
 
+An optional custom website domain can be added in Vercel's project settings. After it is active, add its exact HTTPS origin (for example, `https://tracker.example.com`) to the backend's `CORS_ORIGINS` setting and redeploy the backend. If you also use a custom API domain, update `VITE_API_URL` in Vercel and redeploy the frontend.
+
 ## Project structure
 
 ```

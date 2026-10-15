@@ -22,6 +22,10 @@ backend/*.db
 backend/*.sqlite3
 backend/uploads/*
 !backend/uploads/.gitkeep
+/job_tracker.db
+/job_tracker.db-*
+/uploads/*
+!/uploads/.gitkeep
 
 # JavaScript
 frontend/node_modules/

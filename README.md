@@ -92,6 +92,8 @@ Use the committed templates as the source of variable names:
 
 Never commit a populated `.env` file. Production secrets belong in the hosting provider's environment-variable settings. See the component-specific documentation for the complete API, deployment, and storage details: [backend README](backend/README.md) and [frontend README](frontend/README.md).
 
+For durable production attachments, configure Cloudinary in the backend host with `STORAGE_BACKEND=cloudinary` and the `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` environment variables. The Cloudinary SDK is included in `backend/requirements.txt`; do not put its credentials in the frontend or commit them. A custom domain is optional: add it through Vercel's project settings, then include the website's exact HTTPS origin in the backend's `CORS_ORIGINS` setting.
+
 ## Publish safely to GitHub
 
 This workspace currently has no project-level Git repository. From the repository root:

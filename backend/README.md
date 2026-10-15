@@ -5,12 +5,14 @@ A multi-user job application tracker API built with **FastAPI + SQLAlchemy + Pos
 ## Features implemented
 
 **Core**
+
 - JWT authentication (register/login), bcrypt password hashing
 - Full CRUD on job applications, strictly scoped per authenticated user
 - Dedicated status-update endpoint (for kanban drag-and-drop)
 - Persistent storage via SQLAlchemy + Alembic migrations
 
 **Additional**
+
 - Search, filter (status/company/date range/tag), and combined queries
 - Tags (many-to-many, per-user)
 - File attachments (resumes/cover letters) with a swappable storage backend (local disk for dev, Cloudinary for production)
@@ -91,14 +93,15 @@ pytest
 
 See `.env.example` for the full list with comments. Key ones:
 
-| Variable | Purpose |
-|---|---|
-| `DATABASE_URL` | SQLite locally, Postgres in production |
-| `SECRET_KEY` | JWT signing key — must be a real secret in production |
-| `CORS_ORIGINS` | Comma-separated frontend origin(s) allowed to call the API |
-| `STORAGE_BACKEND` | `local` or `cloudinary` |
-| `SMTP_*` | Optional — enables the weekly digest email |
-| `DIGEST_TRIGGER_SECRET` | Shared secret protecting the digest trigger endpoint |
+| Variable                                                               | Purpose                                                       |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `DATABASE_URL`                                                         | SQLite locally, Postgres in production                        |
+| `SECRET_KEY`                                                           | JWT signing key — must be a real secret in production         |
+| `CORS_ORIGINS`                                                         | Comma-separated frontend origin(s) allowed to call the API    |
+| `STORAGE_BACKEND`                                                      | `local` or `cloudinary`                                       |
+| `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Cloudinary credentials required when using Cloudinary storage |
+| `SMTP_*`                                                               | Optional — enables the weekly digest email                    |
+| `DIGEST_TRIGGER_SECRET`                                                | Shared secret protecting the digest trigger endpoint          |
 
 ## Deployment (Render free tier)
 
@@ -113,7 +116,7 @@ See `.env.example` for the full list with comments. Key ones:
    ```bash
    curl -X POST https://your-api.onrender.com/digest/send-weekly -H "x-digest-secret: $DIGEST_TRIGGER_SECRET"
    ```
-7. **(Optional) Persistent attachments**: free-tier disks are ephemeral (wiped on redeploy). Sign up for Cloudinary's free tier, set `STORAGE_BACKEND=cloudinary` plus the `CLOUDINARY_*` vars, and `pip install cloudinary` (add it to `requirements.txt`) — no code changes needed elsewhere.
+7. **Persistent attachments**: create a Cloudinary account and find the cloud name, API key, and API secret in its dashboard. In the Render Web Service environment settings, set `STORAGE_BACKEND=cloudinary`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`. The Cloudinary SDK is included in `requirements.txt`; redeploy after setting the variables. Keep the API secret out of Git and the frontend. Local storage remains the default for development.
 
 Railway free tier works the same way (Postgres plugin + a service pointed at this repo with the same build/start commands).
 
@@ -140,28 +143,28 @@ git push -u origin main
 
 ## API overview
 
-| Method | Path | Purpose |
-|---|---|---|
-| POST | `/auth/register` | Create account |
-| POST | `/auth/login` | Get JWT |
-| GET | `/auth/me` | Current user |
-| POST | `/jobs` | Create application (409 on duplicate unless `force_create`) |
-| GET | `/jobs` | List (filters: `status_filter`, `company`, `search`, `tag`, `include_archived`, `date_from`, `date_to`) |
-| GET | `/jobs/{id}` | Get one |
-| PATCH | `/jobs/{id}` | Partial update |
-| PATCH | `/jobs/{id}/status` | Status-only update (kanban) |
-| PATCH | `/jobs/{id}/archive` | Archive/unarchive |
-| DELETE | `/jobs/{id}` | Hard delete |
-| GET | `/jobs/check-duplicate` | Pre-flight duplicate check |
-| POST | `/jobs/quick-add-from-url` | Scrape suggestions from a pasted URL |
-| GET | `/tags` / `DELETE /tags/{id}` | Manage tags |
-| POST | `/jobs/{id}/attachments` | Upload file |
-| GET | `/jobs/{id}/attachments` | List files for a job |
-| GET | `/attachments/{id}/download` | Download a file |
-| DELETE | `/attachments/{id}` | Delete a file |
-| GET | `/analytics` | Stats summary |
-| GET | `/export/csv` | CSV export |
-| POST | `/digest/send-weekly` | Trigger weekly emails (cron only, secret-protected) |
+| Method | Path                          | Purpose                                                                                                 |
+| ------ | ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| POST   | `/auth/register`              | Create account                                                                                          |
+| POST   | `/auth/login`                 | Get JWT                                                                                                 |
+| GET    | `/auth/me`                    | Current user                                                                                            |
+| POST   | `/jobs`                       | Create application (409 on duplicate unless `force_create`)                                             |
+| GET    | `/jobs`                       | List (filters: `status_filter`, `company`, `search`, `tag`, `include_archived`, `date_from`, `date_to`) |
+| GET    | `/jobs/{id}`                  | Get one                                                                                                 |
+| PATCH  | `/jobs/{id}`                  | Partial update                                                                                          |
+| PATCH  | `/jobs/{id}/status`           | Status-only update (kanban)                                                                             |
+| PATCH  | `/jobs/{id}/archive`          | Archive/unarchive                                                                                       |
+| DELETE | `/jobs/{id}`                  | Hard delete                                                                                             |
+| GET    | `/jobs/check-duplicate`       | Pre-flight duplicate check                                                                              |
+| POST   | `/jobs/quick-add-from-url`    | Scrape suggestions from a pasted URL                                                                    |
+| GET    | `/tags` / `DELETE /tags/{id}` | Manage tags                                                                                             |
+| POST   | `/jobs/{id}/attachments`      | Upload file                                                                                             |
+| GET    | `/jobs/{id}/attachments`      | List files for a job                                                                                    |
+| GET    | `/attachments/{id}/download`  | Download a file                                                                                         |
+| DELETE | `/attachments/{id}`           | Delete a file                                                                                           |
+| GET    | `/analytics`                  | Stats summary                                                                                           |
+| GET    | `/export/csv`                 | CSV export                                                                                              |
+| POST   | `/digest/send-weekly`         | Trigger weekly emails (cron only, secret-protected)                                                     |
 
 Full interactive schema always available at `/docs` once running.
 
