@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import KanbanBoard from "../components/KanbanBoard";
 import EmptyState from "../components/EmptyState";
 import { api, ApiError } from "../api/client";
 import "./DashboardPage.css";
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -71,7 +72,7 @@ export default function DashboardPage() {
           title="Your board is empty"
           message="Log your first application to start tracking your search."
           actionLabel="Add application"
-          onAction={() => (window.location.href = "/jobs/new")}
+          onAction={() => navigate("/jobs/new")}
         />
       ) : (
         <KanbanBoard jobs={jobs} onStatusChange={handleStatusChange} />

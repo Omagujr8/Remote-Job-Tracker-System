@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StatusBadge from "../components/StatusBadge";
 import EmptyState from "../components/EmptyState";
 import { STATUS_ORDER, STATUS_META } from "../statusMeta";
@@ -7,6 +7,7 @@ import { api, ApiError } from "../api/client";
 import "./ListPage.css";
 
 export default function ListPage() {
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -104,7 +105,7 @@ export default function ListPage() {
           title="No applications match"
           message="Try clearing your filters, or log a new application."
           actionLabel="Add application"
-          onAction={() => (window.location.href = "/jobs/new")}
+          onAction={() => navigate("/jobs/new")}
         />
       ) : (
         <table className="job-table">
