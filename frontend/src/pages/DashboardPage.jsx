@@ -17,7 +17,11 @@ export default function DashboardPage() {
       const data = await api.listJobs();
       setJobs(data);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Couldn't load your applications.");
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : "Couldn't load your applications.",
+      );
     } finally {
       setLoading(false);
     }
@@ -29,13 +33,17 @@ export default function DashboardPage() {
 
   const handleStatusChange = async (jobId, newStatus) => {
     const previous = jobs;
-    setJobs((current) => current.map((j) => (j.id === jobId ? { ...j, status: newStatus } : j)));
+    setJobs((current) =>
+      current.map((j) => (j.id === jobId ? { ...j, status: newStatus } : j)),
+    );
     try {
       await api.updateStatus(jobId, newStatus);
     } catch (err) {
       setJobs(previous); // roll back on failure
       setError(
-        err instanceof ApiError ? err.message : "Couldn't update the status. Please try again."
+        err instanceof ApiError
+          ? err.message
+          : "Couldn't update the status. Please try again.",
       );
     }
   };
@@ -50,7 +58,10 @@ export default function DashboardPage() {
           <p className="page-subtitle">
             {jobs.length} active application{jobs.length === 1 ? "" : "s"}
             {staleCount > 0 && (
-              <span className="dashboard-stale-note"> &middot; {staleCount} going stale</span>
+              <span className="dashboard-stale-note">
+                {" "}
+                &middot; {staleCount} going stale
+              </span>
             )}
           </p>
         </div>

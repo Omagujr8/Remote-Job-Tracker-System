@@ -26,7 +26,11 @@ export default function ListPage() {
       });
       setJobs(data);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Couldn't load your applications.");
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : "Couldn't load your applications.",
+      );
     } finally {
       setLoading(false);
     }
@@ -43,7 +47,11 @@ export default function ListPage() {
     try {
       await api.downloadCsv();
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Couldn't export your applications.");
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : "Couldn't export your applications.",
+      );
     } finally {
       setExporting(false);
     }
@@ -54,10 +62,16 @@ export default function ListPage() {
       <div className="list-header">
         <div>
           <h1>All applications</h1>
-          <p className="page-subtitle">Search, filter, and export your full history.</p>
+          <p className="page-subtitle">
+            Search, filter, and export your full history.
+          </p>
         </div>
         <div className="list-header-actions">
-          <button className="btn btn-secondary" onClick={handleExport} disabled={exporting}>
+          <button
+            className="btn btn-secondary"
+            onClick={handleExport}
+            disabled={exporting}
+          >
             {exporting ? "Exporting..." : "Export CSV"}
           </button>
           <Link to="/jobs/new" className="btn btn-primary">
@@ -74,7 +88,10 @@ export default function ListPage() {
           onChange={(e) => setSearch(e.target.value)}
           className="list-search"
         />
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        >
           <option value="">All statuses</option>
           {STATUS_ORDER.map((s) => (
             <option key={s} value={s}>
@@ -121,7 +138,10 @@ export default function ListPage() {
           </thead>
           <tbody>
             {jobs.map((job) => (
-              <tr key={job.id} className={job.is_archived ? "is-archived-row" : ""}>
+              <tr
+                key={job.id}
+                className={job.is_archived ? "is-archived-row" : ""}
+              >
                 <td>
                   <Link to={`/jobs/${job.id}`} className="job-table-title">
                     {job.job_title}
@@ -133,7 +153,11 @@ export default function ListPage() {
                 </td>
                 <td>{job.application_date}</td>
                 <td>{job.location || "—"}</td>
-                <td>{job.is_archived && <span className="archived-tag">Archived</span>}</td>
+                <td>
+                  {job.is_archived && (
+                    <span className="archived-tag">Archived</span>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
