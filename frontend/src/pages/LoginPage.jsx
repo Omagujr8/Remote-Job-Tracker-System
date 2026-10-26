@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ApiError } from "../api/client";
+import PasswordInput from "./PasswordInput";
 import "./Auth.css";
 
 export default function LoginPage() {
@@ -41,6 +42,12 @@ export default function LoginPage() {
         <h1>Welcome back</h1>
         <p className="auth-subtitle">Log in to pick up your search where you left off.</p>
 
+        {location.state?.registered && (
+          <div className="banner-info" role="status">
+            Your account has been created. Please log in.
+          </div>
+        )}
+
         {error && (
           <div className="banner-error" role="alert">
             {error}
@@ -61,9 +68,8 @@ export default function LoginPage() {
           </div>
           <div className="field">
             <label htmlFor="password">Password</label>
-            <input
+            <PasswordInput
               id="password"
-              type="password"
               autoComplete="current-password"
               required
               value={password}

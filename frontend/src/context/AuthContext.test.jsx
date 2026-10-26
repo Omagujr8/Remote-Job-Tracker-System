@@ -110,11 +110,8 @@ describe("AuthContext", () => {
     expect(localStorage.getItem("m4_token")).toBeNull();
   });
 
-  it("register calls register then logs in automatically", async () => {
-    global.fetch
-      .mockResolvedValueOnce(jsonResponse({ id: 3, email: "new@b.com" })) // /auth/register
-      .mockResolvedValueOnce(jsonResponse({ access_token: "reg-token" })) // /auth/login
-      .mockResolvedValueOnce(jsonResponse({ id: 3, email: "new@b.com" })); // /auth/me
+  it("registers without logging in automatically", async () => {
+    global.fetch.mockResolvedValueOnce(jsonResponse({ id: 3, email: "new@b.com" }));
 
     render(
       <AuthProvider>
@@ -125,6 +122,9 @@ describe("AuthContext", () => {
 
     await userEvent.click(screen.getByText("register"));
 
-    await waitFor(() => expect(screen.getByTestId("user")).toHaveTextContent("new@b.com"));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+    expect(global.fetch.mock.calls[0][0]).toContain("/auth/register");
+    expect(screen.getByTestId("user")).toHaveTextContent("none");
+    expect(localStorage.getItem("m4_token")).toBeNull();
   });
 });

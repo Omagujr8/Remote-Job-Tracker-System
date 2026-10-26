@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ApiError } from "../api/client";
+import PasswordInput from "./PasswordInput";
 import "./Auth.css";
 
 export default function RegisterPage() {
@@ -32,7 +33,7 @@ export default function RegisterPage() {
     setSubmitting(true);
     try {
       await register(email, password);
-      navigate("/", { replace: true });
+      navigate("/login", { replace: true, state: { registered: true } });
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Couldn't create your account. Please try again.");
     } finally {
@@ -72,9 +73,8 @@ export default function RegisterPage() {
           </div>
           <div className="field">
             <label htmlFor="password">Password</label>
-            <input
+            <PasswordInput
               id="password"
-              type="password"
               autoComplete="new-password"
               required
               value={password}
@@ -88,9 +88,8 @@ export default function RegisterPage() {
           </div>
           <div className="field">
             <label htmlFor="confirmPassword">Confirm password</label>
-            <input
+            <PasswordInput
               id="confirmPassword"
-              type="password"
               autoComplete="new-password"
               required
               value={confirmPassword}

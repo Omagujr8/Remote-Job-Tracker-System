@@ -44,6 +44,29 @@
   margin-top: var(--space-5);
 }
 
+.password-input {
+  position: relative;
+  display: flex;
+}
+
+.password-input input {
+  width: 100%;
+  padding-right: 58px;
+}
+
+.password-visibility {
+  position: absolute;
+  top: 50%;
+  right: var(--space-2);
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--pine);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 .auth-switch {
   margin-top: var(--space-5);
   font-size: 14px;
