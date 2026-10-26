@@ -17,7 +17,7 @@ def extract_job_metadata(url: str) -> dict:
     (og:title, og:site_name, <title>). Returns a dict with best-effort guesses.
     Never raises — always returns a usable (possibly empty) result.
     """
-    result = {"job_title": None, "company_name": None, "note": "Parsed successfully."}
+    result = {"job_title": None, "company_name": None, "note": ""}
 
     if not url or not url.startswith(("http://", "https://")):
         result["note"] = "Invalid URL — please enter fields manually."
@@ -69,7 +69,13 @@ def extract_job_metadata(url: str) -> dict:
 
         result["job_title"] = job_title
         result["company_name"] = company_name
-        if not job_title and not company_name:
+        if job_title and company_name:
+            result["note"] = "Parsed successfully."
+        elif job_title:
+            result["note"] = "Found the job title, but couldn't detect the company. Please fill it in manually."
+        elif company_name:
+            result["note"] = "Found the company, but couldn't detect the job title. Please fill it in manually."
+        else:
             result["note"] = (
                 "Couldn't confidently detect the job title or company from this page. "
                 "Please fill them in manually."

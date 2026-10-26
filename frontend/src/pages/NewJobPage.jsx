@@ -93,7 +93,7 @@ export default function NewJobPage() {
       )}
 
       <JobForm
-        key={prefill ? "prefilled" : "blank"}
+        key={prefill?.job_url || "blank"}
         initialForm={{ ...buildInitialForm(null), ...prefill }}
         onSubmit={(payload) => submitJob(payload, false)}
         submitLabel="Add application"
