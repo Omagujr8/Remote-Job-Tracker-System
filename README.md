@@ -136,4 +136,4 @@ Use small, focused commits such as `feat: add kanban status updates`, `fix: isol
 
 ## License
 
-No license has been selected yet. Choose a license before presenting this as an open-source project.
+MIT license
